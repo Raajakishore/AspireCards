@@ -1,19 +1,19 @@
-import React from 'react';
-import { View, StyleSheet, ViewStyle } from 'react-native';
-import UnderDevelopment from '../UnderDevelopment';
+import React from "react";
+import { View, StyleSheet, ViewStyle } from "react-native";
+import UnderDevelopment from "../UnderDevelopment";
 
-export const HomeTab = () : React.ReactElement => {
+export const HomeTab = (): React.ReactElement => {
   return (
     <View style={styles.container}>
-        <UnderDevelopment />
+      <UnderDevelopment />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
-  }
+  },
 });
 
 type Styles = {

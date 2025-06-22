@@ -1,12 +1,15 @@
-import { CompositeNavigationProp, NavigatorScreenParams } from '@react-navigation/native';
+import {
+  CompositeNavigationProp,
+  NavigatorScreenParams,
+} from "@react-navigation/native";
 import {
   NativeStackNavigationProp,
   NativeStackScreenProps,
-} from '@react-navigation/native-stack';
+} from "@react-navigation/native-stack";
 import {
   BottomTabNavigationProp,
   BottomTabScreenProps,
-} from '@react-navigation/bottom-tabs';
+} from "@react-navigation/bottom-tabs";
 
 export interface Card {
   id: number;
@@ -19,22 +22,20 @@ export interface Card {
   isCardFreezed: boolean;
 }
 
-
-
 export interface cardStateType {
-   cardDetails : Card[],
-   selectedCardIdx : number
+  cardDetails: Card[];
+  selectedCardIdx: number;
 }
 
-export interface storeType  {
-    cards : cardStateType
+export interface storeType {
+  cards: cardStateType;
 }
 
 // navigation types
 
 export type HomeTabbarParamList = {
   Home: undefined;
-  'Debit Card': undefined;
+  "Debit Card": undefined;
   Payments: undefined;
   Credit: undefined;
   Profile: undefined;

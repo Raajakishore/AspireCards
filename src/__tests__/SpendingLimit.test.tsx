@@ -1,40 +1,40 @@
-import React from 'react';
-import { render, fireEvent } from '@testing-library/react-native';
-import { SpendingLimit } from '../screens/SpendingLimit';
-import { updateCardAction } from '../store/actions';
-import { useSelector } from 'react-redux';
+import React from "react";
+import { render, fireEvent } from "@testing-library/react-native";
+import { SpendingLimit } from "../screens/SpendingLimit";
+import { updateCardAction } from "../store/actions";
+import { useSelector } from "react-redux";
 
 const mockDispatch = jest.fn();
-jest.mock('react-redux', () => ({
+jest.mock("react-redux", () => ({
   useSelector: jest.fn(),
   useDispatch: () => mockDispatch,
 }));
 
 const mockGoBack = jest.fn();
-jest.mock('@react-navigation/native', () => ({
+jest.mock("@react-navigation/native", () => ({
   useNavigation: () => ({ goBack: mockGoBack }),
 }));
 
-jest.mock('@expo/vector-icons', () => ({ Ionicons: 'Ionicons' }));
-jest.mock('../../assets/icons/homeActiveTabIcon.svg',     () => 'AspireLogo');
-jest.mock('../../assets/icons/indicator.svg',             () => 'IndicatorSVG');
+jest.mock("@expo/vector-icons", () => ({ Ionicons: "Ionicons" }));
+jest.mock("../../assets/icons/homeActiveTabIcon.svg", () => "AspireLogo");
+jest.mock("../../assets/icons/indicator.svg", () => "IndicatorSVG");
 
-describe('<SpendingLimit />', () => {
+describe("<SpendingLimit />", () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it('disables Save when there is no amount selected', () => {
+  it("disables Save when there is no amount selected", () => {
     // @ts-ignore
     useSelector.mockReturnValue(undefined);
 
     const { getByTestId } = render(<SpendingLimit />);
-    const save = getByTestId('save-button');
+    const save = getByTestId("save-button");
 
     expect(save.props.accessibilityState.disabled).toBe(true);
   });
 
-  it('renders current limit and enables Save when card exists', () => {
+  it("renders current limit and enables Save when card exists", () => {
     // @ts-ignore
     useSelector.mockReturnValue({
       id: 1,
@@ -44,14 +44,14 @@ describe('<SpendingLimit />', () => {
     });
 
     const { getByText, getByTestId } = render(<SpendingLimit />);
-    expect(getByText('5000')).toBeTruthy();
+    expect(getByText("5000")).toBeTruthy();
 
-    const save = getByTestId('save-button');
+    const save = getByTestId("save-button");
 
     expect(save.props.accessibilityState.disabled).toBe(false);
   });
 
-  it('updates displayed limit when an AmountButton is pressed', () => {
+  it("updates displayed limit when an AmountButton is pressed", () => {
     //@ts-ignore
     useSelector.mockReturnValue({
       id: 1,
@@ -62,12 +62,12 @@ describe('<SpendingLimit />', () => {
 
     const { getByText, getByTestId } = render(<SpendingLimit />);
 
-    fireEvent.press(getByText('S$ 5000').parent);
-    const save = getByTestId('save-button');
+    fireEvent.press(getByText("S$ 5000").parent);
+    const save = getByTestId("save-button");
     expect(save.props.accessibilityState.disabled).toBe(false);
   });
 
-  it('dispatches updateCardAction and navigates back when Save is pressed', () => {
+  it("dispatches updateCardAction and navigates back when Save is pressed", () => {
     //@ts-ignore
     useSelector.mockReturnValue({
       id: 2,
@@ -77,7 +77,7 @@ describe('<SpendingLimit />', () => {
     });
 
     const { getByTestId } = render(<SpendingLimit />);
-    const save = getByTestId('save-button');
+    const save = getByTestId("save-button");
     fireEvent.press(save);
 
     expect(mockDispatch).toHaveBeenCalledWith(
@@ -87,7 +87,7 @@ describe('<SpendingLimit />', () => {
           spendingLimit: 1000,
           isSpendingLimitEnabled: true,
         },
-      })
+      }),
     );
     expect(mockGoBack).toHaveBeenCalled();
   });

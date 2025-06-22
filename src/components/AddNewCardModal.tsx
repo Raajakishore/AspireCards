@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   Modal,
   View,
@@ -10,17 +10,17 @@ import {
   Platform,
   ViewStyle,
   TextStyle,
-} from 'react-native';
-import { useDispatch } from 'react-redux';
-import { addNewCardAction } from '../store/actions';
-import { colors } from '../theme/colors';
+} from "react-native";
+import { useDispatch } from "react-redux";
+import { addNewCardAction } from "../store/actions";
+import { colors } from "../theme/colors";
 
 interface AddNewCardModalProps {
   visible: boolean;
   onClose: () => void;
 }
 
-function randomInt(min : number, max: number) : number {
+function randomInt(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -32,8 +32,8 @@ function generateExpiryDate(yearsAhead = 5) {
   const offsetMonths = randomInt(1, yearsAhead * 12);
   const future = new Date(now.getFullYear(), now.getMonth() + offsetMonths);
 
-  const month = String(future.getMonth() + 1).padStart(2, '0');
-  const year  = String(future.getFullYear() % 100).padStart(2, '0');
+  const month = String(future.getMonth() + 1).padStart(2, "0");
+  const year = String(future.getFullYear() % 100).padStart(2, "0");
 
   return `${month}/${year}`;
 }
@@ -42,40 +42,50 @@ function generateExpiryDate(yearsAhead = 5) {
  * Generate a random 3-digit CVV
  */
 function generateCVV() {
-  return String(randomInt(0, 999)).padStart(3, '0');
+  return String(randomInt(0, 999)).padStart(3, "0");
 }
 
 export default function AddNewCardModal({
   visible,
   onClose,
 }: AddNewCardModalProps) {
-  const [name, setName] = useState('');
-  const [cardNum, setCardNumber] = useState('');
+  const [name, setName] = useState("");
+  const [cardNum, setCardNumber] = useState("");
   const dispatch = useDispatch();
 
-
   const handleSave = () => {
-    dispatch(addNewCardAction({name, cardNum, id : Date.now(), expiryDate: generateExpiryDate(), cvv: generateCVV(), isSpendingLimitEnabled : false, spendingLimit: 0, isCardFreezed: false }))
+    dispatch(
+      addNewCardAction({
+        name,
+        cardNum,
+        id: Date.now(),
+        expiryDate: generateExpiryDate(),
+        cvv: generateCVV(),
+        isSpendingLimitEnabled: false,
+        spendingLimit: 0,
+        isCardFreezed: false,
+      }),
+    );
     onClose();
   };
 
   return (
     <Modal
-      testID='add-new-card-modal'
+      testID="add-new-card-modal"
       visible={visible}
       animationType="slide"
       transparent
       onRequestClose={onClose}
     >
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
         style={styles.overlay}
       >
         <View style={styles.container}>
           <Text style={styles.title}>Enter Card Details</Text>
 
           <TextInput
-            testID='card-holder-name'
+            testID="card-holder-name"
             style={styles.input}
             placeholder="Card Holder Name"
             value={name}
@@ -84,7 +94,7 @@ export default function AddNewCardModal({
           />
 
           <TextInput
-            testID='card-holder-number'
+            testID="card-holder-number"
             style={styles.input}
             placeholder="Card Number"
             value={cardNum}
@@ -94,16 +104,33 @@ export default function AddNewCardModal({
           />
 
           <View style={styles.buttonRow}>
-            <TouchableOpacity style={styles.button} onPress={onClose} testID='cancel-button'>
-              <Text style={[styles.buttonText, { color: '#666' }]}>Cancel</Text>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={onClose}
+              testID="cancel-button"
+            >
+              <Text style={[styles.buttonText, { color: "#666" }]}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              testID='save-button'
-              style={[styles.button, (!name || cardNum.length < 16) && styles.buttonDisabled]}
+              testID="save-button"
+              style={[
+                styles.button,
+                (!name || cardNum.length < 16) && styles.buttonDisabled,
+              ]}
               onPress={handleSave}
               disabled={!name || cardNum.length < 16}
             >
-              <Text style={{...styles.buttonText,  color : !name || cardNum.length < 16 ? colors.text.opaqueGrey : colors.text.green}}>Save</Text>
+              <Text
+                style={{
+                  ...styles.buttonText,
+                  color:
+                    !name || cardNum.length < 16
+                      ? colors.text.opaqueGrey
+                      : colors.text.green,
+                }}
+              >
+                Save
+              </Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -121,14 +148,14 @@ const styles = StyleSheet.create<Styles>({
     opacity: 0.5,
   },
   buttonRow: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
+    flexDirection: "row",
+    justifyContent: "flex-end",
   },
   buttonText: {
     color: colors.text.green,
-    fontFamily: 'AvenirDemiBold',
+    fontFamily: "AvenirDemiBold",
     fontSize: 16,
-    fontWeight: '500'
+    fontWeight: "500",
   },
   container: {
     backgroundColor: colors.background.primary,
@@ -138,24 +165,24 @@ const styles = StyleSheet.create<Styles>({
   },
   input: {
     borderBottomWidth: 1,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     fontSize: 16,
     marginBottom: 16,
     paddingVertical: 8,
   },
   overlay: {
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: "rgba(0,0,0,0.5)",
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
     padding: 20,
   },
   title: {
     color: colors.text.green,
-    fontFamily: 'AvenirDemiBold',
+    fontFamily: "AvenirDemiBold",
     fontSize: 18,
-    fontWeight: '600',
+    fontWeight: "600",
     marginBottom: 12,
-    textAlign: 'center'
+    textAlign: "center",
   },
 });
 

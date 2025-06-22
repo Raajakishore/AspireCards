@@ -1,141 +1,161 @@
-import { StyleSheet, View, Text, ScrollView, SafeAreaView, StatusBar, ViewStyle, TextStyle, Platform } from 'react-native';
-import { colors } from '../../theme/colors';
-import { CardWithInfo } from '../../components/CardWithInfo';
-import { debitCardItems } from '../../utils/helper';
-import { CreditCardCarousel } from '../../components/CreditCardUI';
-import AspireLogo from '../../..//assets/icons/homeActiveTabIcon.svg'
-import AddNewCardModal from '../../components/AddNewCardModal';
-import { useEffect, useState } from 'react';
-import { SpendingLimitBar } from '../../components/SpendingLimitBar';
-import { useDispatch } from 'react-redux';
-import { getCardDetailsAction } from '../../store/actions';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  SafeAreaView,
+  StatusBar,
+  ViewStyle,
+  TextStyle,
+  Platform,
+} from "react-native";
+import { colors } from "../../theme/colors";
+import { CardWithInfo } from "../../components/CardWithInfo";
+import { debitCardItems } from "../../utils/helper";
+import { CreditCardCarousel } from "../../components/CreditCardUI";
+import AspireLogo from "../../..//assets/icons/homeActiveTabIcon.svg";
+import AddNewCardModal from "../../components/AddNewCardModal";
+import { useEffect, useState } from "react";
+import { SpendingLimitBar } from "../../components/SpendingLimitBar";
+import { useDispatch } from "react-redux";
+import { getCardDetailsAction } from "../../store/actions";
 
 export const DebitCardTab = () => {
-   const [modalVisible, setModalVisible] = useState(false);
-   const dispatch = useDispatch();
-   useEffect(()=>{
-      dispatch(getCardDetailsAction());
-   }, [])
+  const [modalVisible, setModalVisible] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCardDetailsAction());
+  }, []);
   return (
-    <SafeAreaView style = { styles.containerStyle } >
-      <StatusBar barStyle="light-content"  backgroundColor={colors.background.primary}/>
-        <View style = { styles.aspireLogoViewStyle} >
-          <AspireLogo width={28} height={28} />
+    <SafeAreaView style={styles.containerStyle}>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={colors.background.primary}
+      />
+      <View style={styles.aspireLogoViewStyle}>
+        <AspireLogo width={28} height={28} />
+      </View>
+      <View
+        style={{
+          ...styles.topContainer,
+          marginTop: Platform.OS === "ios" ? 0 : 32,
+        }}
+      >
+        <Text style={styles.debitCardTextStyle}>{"Debit Card"}</Text>
+        <Text style={styles.balanceTitleTextStyle}>{"Available Balance"}</Text>
+        <View style={styles.balanceViewStyle}>
+          <View style={styles.dollarViewStyle}>
+            <Text style={styles.dollarTextStyle}>S$</Text>
+          </View>
+
+          <Text style={styles.balanceTextStyle}>3,000</Text>
         </View>
-        <View style = { { ...styles.topContainer, marginTop: Platform.OS === "ios" ? 0 : 32}  } >
-                <Text style={ styles.debitCardTextStyle }>{"Debit Card"}</Text>
-                <Text style={ styles.balanceTitleTextStyle }>{"Available Balance"}</Text>
-                <View style = { styles.balanceViewStyle }>
-                    <View style = {styles.dollarViewStyle}>
-                            <Text style={ styles.dollarTextStyle }>S$</Text>
-                    </View>
-
-                    <Text style={ styles.balanceTextStyle }>3,000</Text>
-
-                </View>
-
-        </View>
-       <ScrollView
-            style={ styles.scrollViewStyle }
-            contentContainerStyle={ styles.contentContainerStyle}
-            showsVerticalScrollIndicator={false}
-          >
-        <View style = { styles.bottomContainer } >
-            <CreditCardCarousel />
-            <View style = { styles.addedMargin }>
-            < SpendingLimitBar />
-            {
-                debitCardItems.map((item)=>{
-                    return (<CardWithInfo  key={item.title}  item = {item} setModalVisible = {setModalVisible}  />)
-                })
-            }
-            </View>
-                <AddNewCardModal
-                  visible={modalVisible}
-                  onClose={() => setModalVisible(false)}
+      </View>
+      <ScrollView
+        style={styles.scrollViewStyle}
+        contentContainerStyle={styles.contentContainerStyle}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.bottomContainer}>
+          <CreditCardCarousel />
+          <View style={styles.addedMargin}>
+            <SpendingLimitBar />
+            {debitCardItems.map((item) => {
+              return (
+                <CardWithInfo
+                  key={item.title}
+                  item={item}
+                  setModalVisible={setModalVisible}
                 />
+              );
+            })}
+          </View>
+          <AddNewCardModal
+            visible={modalVisible}
+            onClose={() => setModalVisible(false)}
+          />
         </View>
-        </ScrollView>
+      </ScrollView>
     </SafeAreaView>
   );
-}
+};
 
 const styles = StyleSheet.create<Styles>({
+  addedMargin: {
+    marginTop: "42%",
+  },
   aspireLogoViewStyle: {
     position: "absolute",
     right: 24,
-    top: 50
-  },
-  containerStyle: {
-     flex:1, 
-     backgroundColor : colors.background.secondary
+    top: 50,
   },
   balanceTextStyle: {
-      color: colors.text.primary,
-      fontFamily : "AvenirBold",
-      fontSize: 24
+    color: colors.text.primary,
+    fontFamily: "AvenirBold",
+    fontSize: 24,
   },
   balanceTitleTextStyle: {
-      color: colors.text.primary,
-      fontFamily : "AvenirMedium",
-      fontSize: 14
-  },
-  scrollViewStyle : { 
-    height:"95%", 
-    width:"100%", 
-    zIndex: 10, 
-    position: "absolute", 
-    bottom:0 
+    color: colors.text.primary,
+    fontFamily: "AvenirMedium",
+    fontSize: 14,
   },
   balanceViewStyle: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    marginVertical: 14
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    marginVertical: 14,
   },
-  contentContainerStyle : {
-    paddingTop: "55%"
-  },
-  bottomContainer : {
+  bottomContainer: {
     backgroundColor: colors.background.primary,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     flex: 0.8,
     padding: 12,
-    paddingBottom: 32
+    paddingBottom: 32,
   },
   container: {
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    alignItems: "center",
+    backgroundColor: "#fff",
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
   },
-  addedMargin : {
-    marginTop: "42%"
+  containerStyle: {
+    backgroundColor: colors.background.secondary,
+    flex: 1,
+  },
+  contentContainerStyle: {
+    paddingTop: "55%",
   },
   debitCardTextStyle: {
-      color: colors.text.primary,
-      fontFamily : "AvenirBold",
-      fontSize: 24,
-      marginVertical: 24
-  },
-  dollarTextStyle : {
     color: colors.text.primary,
-    fontFamily : "AvenirBold",
-    fontSize: 12
+    fontFamily: "AvenirBold",
+    fontSize: 24,
+    marginVertical: 24,
+  },
+  dollarTextStyle: {
+    color: colors.text.primary,
+    fontFamily: "AvenirBold",
+    fontSize: 12,
   },
   dollarViewStyle: {
-    alignItems:'center',
+    alignItems: "center",
     backgroundColor: colors.background.green,
     borderRadius: 6,
-    justifyContent:'center',
+    justifyContent: "center",
     marginRight: 10,
     paddingHorizontal: 12,
-    paddingVertical: 4
+    paddingVertical: 4,
   },
-  topContainer : {
-        flex: 0.2,
-        paddingHorizontal : 24,
-  }
+  scrollViewStyle: {
+    bottom: 0,
+    height: "95%",
+    position: "absolute",
+    width: "100%",
+    zIndex: 10,
+  },
+  topContainer: {
+    flex: 0.2,
+    paddingHorizontal: 24,
+  },
 });
 
 type Styles = {

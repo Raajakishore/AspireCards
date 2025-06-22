@@ -1,13 +1,12 @@
 import { Card } from "./types";
 
-export const debitCardItems : DebitCardItemInfo[] = [
+export const debitCardItems: DebitCardItemInfo[] = [
   {
     title: "Top-up account",
     body: "Deposit money to your account to use with card",
     isTogglePresent: false,
     toggleOnTitle: "",
     toggleOnBody: "",
-
   },
   {
     title: "Weekly spending limit",
@@ -47,13 +46,13 @@ export interface DebitCardItemInfo {
   toggleOnBody: string;
 }
 
-export const dummyCardData : Card = { 
-  id : 0,
-  name : "No Card Found", 
-  cardNum : "*****************", 
-  expiryDate: "**/**", 
-  cvv: "***", 
-  isCardFreezed: true ,
+export const dummyCardData: Card = {
+  id: 0,
+  name: "No Card Found",
+  cardNum: "*****************",
+  expiryDate: "**/**",
+  cvv: "***",
+  isCardFreezed: true,
   isSpendingLimitEnabled: false,
-  spendingLimit: 0
-}
+  spendingLimit: 0,
+};
