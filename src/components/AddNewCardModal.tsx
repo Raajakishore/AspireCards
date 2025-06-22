@@ -61,6 +61,7 @@ export default function AddNewCardModal({
 
   return (
     <Modal
+      testID='add-new-card-modal'
       visible={visible}
       animationType="slide"
       transparent
@@ -74,6 +75,7 @@ export default function AddNewCardModal({
           <Text style={styles.title}>Enter Card Details</Text>
 
           <TextInput
+            testID='card-holder-name'
             style={styles.input}
             placeholder="Card Holder Name"
             value={name}
@@ -82,6 +84,7 @@ export default function AddNewCardModal({
           />
 
           <TextInput
+            testID='card-holder-number'
             style={styles.input}
             placeholder="Card Number"
             value={cardNum}
@@ -91,10 +94,11 @@ export default function AddNewCardModal({
           />
 
           <View style={styles.buttonRow}>
-            <TouchableOpacity style={styles.button} onPress={onClose}>
+            <TouchableOpacity style={styles.button} onPress={onClose} testID='cancel-button'>
               <Text style={[styles.buttonText, { color: '#666' }]}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity
+              testID='save-button'
               style={[styles.button, (!name || cardNum.length < 16) && styles.buttonDisabled]}
               onPress={handleSave}
               disabled={!name || cardNum.length < 16}

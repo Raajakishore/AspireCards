@@ -48,6 +48,7 @@ export const SpendingLimit = () => {
             <View>
             <View style = {styles.saveViewStyle } >
               <TouchableOpacity 
+                testID='save-button'
                 style = {{ height: 56, width: "90%", backgroundColor: spendingLimit === 0 ? colors.background.grey : colors.background.green, borderRadius: 32, justifyContent: 'center', alignItems: 'center'}} 
                 disabled={spendingLimit === 0}
                 activeOpacity={0.7}

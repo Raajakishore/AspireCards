@@ -74,13 +74,13 @@ export const CardWithInfo = ( { item  ,setModalVisible}  : cardWithInfoProps ) =
         <View style = { styles.iconStyle } >
             { svgToRender(title) }
             <View style = { styles.infoStyle } >
-                <Text style={styles.titleTextStyle}>{ isOn ? toggleOnTitle : title }</Text>
-                <Text style={styles.bodyTextStyle}>{ isOn ? title === "Weekly spending limit" ? toggleOnBody + currentCard?.spendingLimit : toggleOnBody : body }</Text>
+                <Text testID = "title" style={styles.titleTextStyle}>{ isOn ? toggleOnTitle : title }</Text>
+                <Text testID = "body" style={styles.bodyTextStyle}>{ isOn ? title === "Weekly spending limit" ? toggleOnBody + currentCard?.spendingLimit : toggleOnBody : body }</Text>
             </View>
         </View>
 
        { isTogglePresent ?
-      <TouchableOpacity onPress={onTogglePress}>
+      <TouchableOpacity testID = "toggle-button" onPress={onTogglePress}>
         <Fontisto
           name={isOn ? 'toggle-on' : 'toggle-off'}
           size={50}

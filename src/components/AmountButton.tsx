@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TouchableOpacity, TextStyle, ViewStyle } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, TextStyle, ViewStyle } from 'react-native';
 import { useState } from 'react';
 import { colors } from '../theme/colors';
 
@@ -8,11 +8,10 @@ interface amountButtonProps {
 }
 
 export const AmountButton  = ( { amount, setAmount } : amountButtonProps ) => {
-    const [isOn, setIsOn] = useState(true);
     
   return (
-    <TouchableOpacity style = { styles.container } onPress = { ()=> { setAmount(amount) } }>
-            <Text style = { styles.amountTextStyle }>{"S$ " + amount}</Text>
+    <TouchableOpacity  testID="amount-button" style = { styles.container } onPress = { ()=> { setAmount(amount) } }>
+            <Text testID="amount-text" style = { styles.amountTextStyle }>{"S$ " + amount}</Text>
     </TouchableOpacity>
   );
 }

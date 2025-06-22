@@ -27,7 +27,7 @@ export function SpendingLimitBar() {
   return (
     <View style={styles.wrapper}>
     <View style = {{flexDirection:'row', justifyContent:'space-between'}}>
-      <Text style={styles.title}>Debit card spending limit</Text>
+      <Text testID = "header" style={styles.title}>Debit card spending limit</Text>
 
       <View style={styles.amountRow}>
         <Text style={styles.spent}>${spent.toLocaleString()}</Text>

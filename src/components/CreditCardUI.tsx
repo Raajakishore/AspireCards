@@ -67,7 +67,7 @@ export const CreditCardUI = ( { item  } : { item :  Card} ) => {
             </View>
 
             <View style = { styles.nameViewStyle } >
-                <Text style = { styles.nameTextStyle } >{name}</Text>
+                <Text testID = "card-name" style = { styles.nameTextStyle } >{name}</Text>
             </View>
 
             <View style = { styles.cardNumViewStyle } >
@@ -78,8 +78,8 @@ export const CreditCardUI = ( { item  } : { item :  Card} ) => {
             </View>
 
             <View style = { styles.expAndCvvViewStyle }>
-                <Text style = { styles.cardInfoTextStyle }>{ `Thru: ${expiryDate}`}</Text>
-                <Text style = { styles.cardInfoTextStyle }>{ `CVV: ${cardNumberVisibility ? cvv : "***"}`}</Text>
+                <Text testID = "expiry-date" style = { styles.cardInfoTextStyle }>{ `Thru: ${expiryDate}`}</Text>
+                <Text testID = "cvv" style = { styles.cardInfoTextStyle }>{ `CVV: ${cardNumberVisibility ? cvv : "***"}`}</Text>
             </View>
 
             <View style = { styles.visaLogoViewStyle }>
