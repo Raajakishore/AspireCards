@@ -3,9 +3,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 const initialState = {
-            cardDetails: [ { "id": 1, name: "Mark Henry", cardNum: "1234567890123456", expiryDate: "12/25", cvv: "234", isSpendingLimitEnabled : false, spendingLimit: 0, isCardFreezed: false},
-            { "id": 2, name: "Mark Henry", cardNum: "1234567890123456", expiryDate: "12/25", cvv: "234", isSpendingLimitEnabled : false, spendingLimit: 0, isCardFreezed: false},
-            { "id": 3, name: "Mark Henry", cardNum: "1234567890123456", expiryDate: "12/25", cvv: "234", isSpendingLimitEnabled : false, spendingLimit: 0, isCardFreezed: false} ],
+            cardDetails: [  ],
             selectedCardIdx : 1
 };
 
@@ -14,11 +12,12 @@ export const cardSlice = createSlice({
   initialState,
   reducers: {
     storeNewCard(state, action: PayloadAction<number>) {
-          console.log("action.payload 2", action.payload);
         state.cardDetails.push(action.payload);
     },
+    setAllCardDetails(state, action: PayloadAction<number>) {
+        state.cardDetails = action.payload;
+    },
     setSelectedCardIdx(state, action: PayloadAction<number>) {
-        console.log("check 2",action.payload.selectedCardIdx );
         state.selectedCardIdx = action.payload.selectedCardIdx;
     },
        updateCardSettings(
@@ -31,11 +30,9 @@ export const cardSlice = createSlice({
       }>
     ) {
       const { id, isSpendingLimitEnabled, spendingLimit, isCardFreezed } = action.payload;
-      console.log("action", action.payload)
       const card = state.cardDetails.find((c) => c.id === id);
       if (card) {
         if ( typeof isSpendingLimitEnabled === "boolean") {
-            console.log("incoming");
           card.isSpendingLimitEnabled = isSpendingLimitEnabled;
         }
         if ( typeof spendingLimit === "number") {
@@ -50,5 +47,5 @@ export const cardSlice = createSlice({
 });
 
 // Export actions & reducer
-export const { storeNewCard, setSelectedCardIdx, updateCardSettings } = cardSlice.actions;
+export const { storeNewCard, setSelectedCardIdx, updateCardSettings , setAllCardDetails} = cardSlice.actions;
 export default cardSlice.reducer;

@@ -8,7 +8,7 @@ import { AmountButton } from '../components/AmountButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentCard } from '../store/selectors';
 import { useState } from 'react';
-import { updateCardSettings } from '../store/cardSlice';
+import { updateCardAction } from '../store/actions';
 
 export const SpendingLimit = () => {
   const navigation = useNavigation();
@@ -50,10 +50,12 @@ export const SpendingLimit = () => {
                 activeOpacity={0.7}
                 onPress={() =>{
                     dispatch(
-                      updateCardSettings({
+                      updateCardAction({
                         id: currentCard.id,
+                        updates: {
                         spendingLimit,
                         isSpendingLimitEnabled: true
+                        }
                       })
                     )
                     navigation.goBack();

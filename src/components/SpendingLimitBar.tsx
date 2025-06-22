@@ -9,7 +9,7 @@ export function SpendingLimitBar() {
   const [spent, setSpent] = useState(0);
   const currentCard = useSelector(selectCurrentCard);
 
-  const limit = currentCard.spendingLimit;
+  const limit = currentCard?.spendingLimit ?? 0;
 
   useEffect(() => {
     // pick a random integer [0..limit]
@@ -20,7 +20,7 @@ export function SpendingLimitBar() {
   const progressPercent = limit > 0 ? (spent / limit) * 100 : 0;
 
 
-  if( !currentCard.isSpendingLimitEnabled ){
+  if( currentCard && !currentCard.isSpendingLimitEnabled ){
     return null
   }
 

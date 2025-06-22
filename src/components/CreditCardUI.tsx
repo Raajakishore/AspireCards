@@ -8,10 +8,10 @@ import HideEyeSVG from '../../assets/icons/hideCardNumber.svg'
 import Carousel from 'react-native-snap-carousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedCardIdx } from '../store/cardSlice';
+import { dummyCardData } from '../utils/helper';
 
 export const CreditCardCarousel  = (  ) => {
     const cardDetails = useSelector((state)=>state.cards.cardDetails);
-    
     const carouselRef = useRef(null);
     const { width: SLIDER_WIDTH } = Dimensions.get('window');
     const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.90);
@@ -19,6 +19,11 @@ export const CreditCardCarousel  = (  ) => {
     const dispatch = useDispatch();
   return (
     <View style = { styles.container }>
+        {
+        cardDetails.length === 0 ?
+
+        <CreditCardUI  item={ dummyCardData } />
+        :
         <Carousel
             ref={carouselRef}
             data={ cardDetails }
@@ -30,10 +35,10 @@ export const CreditCardCarousel  = (  ) => {
             inactiveSlideScale={0.94}
             inactiveSlideOpacity={0.7}
             onSnapToItem={(index) => {
-                console.log("check");
                 dispatch(setSelectedCardIdx( { selectedCardIdx : cardDetails[index].id} ) );
             }}
         />
+        }
        
     </View>
   );

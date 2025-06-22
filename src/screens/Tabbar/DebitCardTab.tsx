@@ -5,11 +5,18 @@ import { debitCardItems } from '../../utils/helper';
 import { CreditCardCarousel } from '../../components/CreditCardUI';
 import AspireLogo from '../../..//assets/icons/homeActiveTabIcon.svg'
 import AddNewCardModal from '../../components/AddNewCardModal';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SpendingLimitBar } from '../../components/SpendingLimitBar';
+import { useDispatch } from 'react-redux';
+import { getCardDetailsAction } from '../../store/actions';
 
 export const DebitCardTab = () => {
    const [modalVisible, setModalVisible] = useState(false);
+   const dispatch = useDispatch();
+   useEffect(()=>{
+
+      dispatch(getCardDetailsAction());
+   }, [])
   return (
     <View style = { { flex:1, backgroundColor : colors.background.secondary} } >
         <View style = { styles.aspireLogoViewStyle} >
@@ -32,7 +39,7 @@ export const DebitCardTab = () => {
         <View style = { styles.bottomContainer } >
             <CreditCardCarousel />
             <View style = {{marginTop: "45%"}}>
-            < SpendingLimitBar limit = {2000}/>
+            < SpendingLimitBar />
             {
            
               

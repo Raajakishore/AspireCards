@@ -46,3 +46,11 @@ export const debitCardItems = [
     inverseSubtitle: "",
   },
 ];
+
+export const dummyCardData = { 
+  name : "No Card Found", 
+  cardNum : "*****************", 
+  expiryDate: "**/**", 
+  cvv: "***", 
+  isCardFreezed: true 
+}

@@ -5,14 +5,12 @@ import SpendingLimitSVG from '../../assets/icons/spendingLimit.svg'
 import GetNewCardSVG from '../../assets/icons/newCard.svg'
 import DeactivatedCardSVG from '../../assets/icons/deactivatedCard.svg'
 import FreezeCardSVG from '../../assets/icons/freezeCard.svg'
-import ToggleOn from '../../assets/toggle.svg'
-import ToggleOff from '../../assets/toggle-1.svg'
 import { Fontisto } from '@expo/vector-icons';
 import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentCard } from '../store/selectors';
-import { updateCardSettings } from '../store/cardSlice';
+import { updateCardAction } from '../store/actions';
 
 
 const svgToRender = ( title )=>{
@@ -35,36 +33,36 @@ export const CardWithInfo  = ( { title, body, isTogglePresent  = false, setModal
 
     const navigation = useNavigation();
     const currentCard = useSelector(selectCurrentCard);
-    console.log("currentCard", currentCard);
-    const [isOn, setIsOn] = useState(currentCard);
+    const [isOn, setIsOn] = useState(false);
     const dispatch = useDispatch();
-    console.log("currentCard", currentCard);
+
     useEffect(()=>{
         if(title === "Weekly spending limit"){
-            setIsOn(currentCard.isSpendingLimitEnabled)
+            setIsOn(currentCard && currentCard.isSpendingLimitEnabled)
         } else if ( title === "Freeze card" ) {
-            setIsOn(currentCard.isCardFreezed)
+            setIsOn(currentCard && currentCard.isCardFreezed)
         }
     }, [currentCard])
 
     const onTogglePress = () => {
-        console.log("Weekly spending limit && isOn",title, isOn)
-        if(title === "Weekly spending limit" && !isOn){
+        if (!currentCard){
+            return ;
+        }
+        else if(title === "Weekly spending limit" && !isOn){
             navigation.navigate("SpendingLimit");
         }
         else if(title === "Weekly spending limit" && isOn){
-            console.log("incoming 2");
-            dispatch(updateCardSettings({ id: currentCard.id, isSpendingLimitEnabled: false, spendingLimit : 0 }));
+            dispatch(updateCardAction({ id: currentCard.id, updates: { isSpendingLimitEnabled: false, spendingLimit : 0  }}));
             setIsOn(prev => !prev); 
         }
         else if ( title === "Freeze card" ) {
-            dispatch(updateCardSettings({ id: currentCard.id, isCardFreezed : !isOn }));
+            dispatch(updateCardAction({ id: currentCard.id, updates: { isCardFreezed : !isOn } }));
             setIsOn(prev => !prev); 
         }
     }
     
   return (
-    <TouchableOpacity style = { styles.container } onPress = {()=>{ if(title === "Get a new card") {setModalVisible(true)} }}>
+    <TouchableOpacity style = { [ styles.container, !currentCard && styles.emptyCardStyle ] } onPress = {()=>{ if(title === "Get a new card") {setModalVisible(true)} }}>
 
         <View style = { styles.iconStyle } >
             { svgToRender(title) }
@@ -79,7 +77,7 @@ export const CardWithInfo  = ( { title, body, isTogglePresent  = false, setModal
         <Fontisto
           name={isOn ? 'toggle-on' : 'toggle-off'}
           size={50}
-          color={isOn ? colors.background.green : colors.background.grey}
+          color={isOn  ? colors.background.green : colors.background.grey}
         />
       </TouchableOpacity>
         :
@@ -105,5 +103,8 @@ const styles = StyleSheet.create({
     },
     toggleButtonStyle: {
 
+    },
+    emptyCardStyle: {
+        opacity: 0.6
     }
 });
