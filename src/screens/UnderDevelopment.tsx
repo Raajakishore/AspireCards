@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { Text, StyleSheet, Dimensions, SafeAreaView, StatusBar, ViewStyle, TextStyle } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { colors } from '../theme/colors';
 
@@ -7,20 +7,21 @@ const { width } = Dimensions.get('window');
 
 export default function UnderDevelopment() {
   return (
-    <View style={styles.container}>
-      <LottieView
-        source={require('../../assets/animations/underDevelopment.json')}
-        autoPlay
-        loop
-        style={styles.lottie}
-      />
-      <Text style={styles.title}>
-        This screen is under development
-      </Text>
-      <Text style={styles.subtitle}>
-        Check back soon!
-      </Text>
-    </View>
+        <SafeAreaView style = { styles.container  } >
+          <StatusBar barStyle="dark-content" backgroundColor={colors.background.secondary} />
+          <LottieView
+            source={require('../../assets/animations/underDevelopment.json')}
+            autoPlay
+            loop
+            style={styles.lottie}
+          />
+          <Text style={styles.title}>
+            This screen is under development
+          </Text>
+          <Text style={styles.subtitle}>
+            Check back soon!
+          </Text>
+        </SafeAreaView>
   );
 }
 
@@ -52,3 +53,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
 });
+
+type Styles = {
+  container: ViewStyle;
+  lottie: ViewStyle;
+  subtitle: TextStyle;
+  title: TextStyle;
+};

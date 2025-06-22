@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Dimensions, ViewStyle, TextStyle } from 'react-native';
 import { colors } from '../theme/colors';
 import { useSelector } from 'react-redux';
 import { selectCurrentCard } from '../store/selectors';
@@ -46,7 +46,7 @@ export function SpendingLimitBar() {
 const BAR_HEIGHT = 15;
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   amountRow: {
     alignItems: 'center',
     flexDirection: 'row',
@@ -55,13 +55,13 @@ const styles = StyleSheet.create({
   barBackground: {
     width: '100%',
     height: BAR_HEIGHT,
-    backgroundColor: colors.background.opaqueGreen, // light green background
+    backgroundColor: colors.background.opaqueGreen,
     borderRadius: BAR_HEIGHT / 2,
     overflow: 'hidden',
   },
   barFill: {
-    backgroundColor: '#28A745',
-    height: '100%', // green fill
+    backgroundColor: colors.background.green,
+    height: '100%', 
   },
   limit: {
     color: colors.text.mediumGrey,
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   spent: {
     color: colors.background.green,
     fontFamily: 'AvenirDemiBold',
-    fontSize: 14,          // green
+    fontSize: 14
   },
   title: {
     color: colors.background.secondary,
@@ -89,3 +89,14 @@ const styles = StyleSheet.create({
     width: SCREEN_WIDTH * 0.9,
   },
 });
+
+type Styles = {
+  amountRow: ViewStyle;
+  barBackground: ViewStyle;
+  barFill: ViewStyle;
+  limit: TextStyle;
+  separator: TextStyle;
+  spent: TextStyle;
+  title: TextStyle;
+  wrapper: ViewStyle;
+};

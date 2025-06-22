@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { colors } from '../theme/colors';
 import InsightSVG from '../../assets/icons/insight.svg'
 import SpendingLimitSVG from '../../assets/icons/spendingLimit.svg'
@@ -38,16 +38,16 @@ interface cardWithInfoProps {
 
 export const CardWithInfo = ( { item  ,setModalVisible}  : cardWithInfoProps ) => {
     const { title , body, isTogglePresent, toggleOnTitle, toggleOnBody} = item;
-    const navigation = useNavigation();
+    const navigation = useNavigation<any>();
     const currentCard = useSelector(selectCurrentCard);
     const [isOn, setIsOn] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(()=>{
         if(title === "Weekly spending limit"){
-            setIsOn(currentCard && currentCard.isSpendingLimitEnabled)
+            setIsOn(Boolean(currentCard && currentCard.isSpendingLimitEnabled))
         } else if ( title === "Freeze card" ) {
-            setIsOn(currentCard && currentCard.isCardFreezed)
+            setIsOn(Boolean(currentCard && currentCard.isCardFreezed))
         }
     }, [currentCard])
 
@@ -94,7 +94,7 @@ export const CardWithInfo = ( { item  ,setModalVisible}  : cardWithInfoProps ) =
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
     container: {
         alignItems:'center', 
         flexDirection:'row', 
@@ -121,3 +121,16 @@ const styles = StyleSheet.create({
         marginVertical : 2 
     }
 });
+
+type Styles = {
+  container: ViewStyle;
+  emptyCardStyle: ViewStyle;
+  iconStyle: ViewStyle;
+  infoStyle: ViewStyle;
+  titleTextStyle: TextStyle;
+  bodyTextStyle: TextStyle;
+};
+
+function NativeStackNavigationProp<T>() {
+    throw new Error('Function not implemented.');
+}

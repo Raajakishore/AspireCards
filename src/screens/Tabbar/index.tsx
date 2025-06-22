@@ -5,7 +5,6 @@ import { DebitCardTab } from './DebitCardTab';
 import { PaymentsTab } from './PaymentsTab';
 import { CreditTab } from './CreditTab';
 import { ProfileTab } from './ProfileTab';
-import { Feather } from '@expo/vector-icons';
 import { colors } from '../../theme/colors';
 import CreditTabActiveIcon from '../../../assets/icons/creditActiveTabIcon.svg'
 import CreditTabInActiveTabIcon from '../../../assets/icons/creditInActiveTabIcon.svg'
@@ -17,16 +16,17 @@ import ProfileActiveTabIcon from '../../../assets/icons/profileActiveTabIcon.svg
 import ProfileInActiveTabIcon from '../../../assets/icons/profileInActiveTabIcon.svg'
 import HomeActiveTabIcon from '../../../assets/icons/homeActiveTabIcon.svg'
 import HomeInActiveTabIcon from '../../../assets/icons/homeInActiveTabIcon.svg'
+import { HomeTabbarParamList } from '../../utils/types';
 
-const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator<HomeTabbarParamList>();
 
 export function HomeTabbar() {
   return (
     <Tab.Navigator
         screenOptions={({ route }) => ({
         headerShown: false,
-        tabBarActiveTintColor: colors.background.green,       // Highlighted icon/text color
-        tabBarInactiveTintColor: colors.background.grey,      // Non-highlighted color
+        tabBarActiveTintColor: colors.background.green,
+        tabBarInactiveTintColor: colors.background.grey, 
         tabBarIcon: ({ focused, size }) => {
           switch (route.name) {
             case 'Home':
@@ -51,12 +51,3 @@ export function HomeTabbar() {
     </Tab.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    flex: 1,
-    justifyContent: 'center',
-  },
-});

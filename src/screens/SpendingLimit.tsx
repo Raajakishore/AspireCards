@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, StatusBar, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import { colors } from '../theme/colors';
 import AspireLogo from '../../assets/icons/homeActiveTabIcon.svg'
@@ -13,10 +13,12 @@ import { updateCardAction } from '../store/actions';
 export const SpendingLimit = () => {
   const navigation = useNavigation();
   const currentCard = useSelector(selectCurrentCard);
-  const [spendingLimit, setSpendingLimit] = useState(currentCard.spendingLimit);
+  const [spendingLimit, setSpendingLimit] = useState(currentCard?.spendingLimit ?? 0);
   const dispatch = useDispatch();
   return (
-       <View style = { styles.container }>
+       <SafeAreaView style = { styles.container }>
+          <StatusBar barStyle="light-content" backgroundColor={colors.background.secondary} />
+        
          <View style = { styles.headerStyle }>
             <Ionicons name="chevron-back" size={32} color={ colors.background.primary } onPress = { () => { navigation.goBack() }} />
             <AspireLogo width={28} height={28} />
@@ -49,6 +51,7 @@ export const SpendingLimit = () => {
                 disabled={spendingLimit === 0}
                 activeOpacity={0.7}
                 onPress={() =>{
+                  if(currentCard){
                     dispatch(
                       updateCardAction({
                         id: currentCard.id,
@@ -58,6 +61,7 @@ export const SpendingLimit = () => {
                         }
                       })
                     )
+                  }
                     navigation.goBack();
                 }
                   }
@@ -67,11 +71,11 @@ export const SpendingLimit = () => {
             </View>
             </View>
          </View>
-       </View>
+       </SafeAreaView>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   amountTextStyle: {
     fontFamily: 'AvenirBold',
     fontSize: 24,
@@ -130,3 +134,16 @@ const styles = StyleSheet.create({
     marginLeft: 12
   }
 });
+
+type Styles = {
+  amountTextStyle: TextStyle;
+  bottomContainerViewStyle: ViewStyle;
+  container: ViewStyle;
+  dollarAndTextStyle: ViewStyle;
+  dollarTextStyle: TextStyle;
+  dollarViewStyle: ViewStyle;
+  headerStyle: ViewStyle;
+  indicatorViewStyle: ViewStyle;
+  spendingLimitTextStyle: TextStyle;
+  weeklyDebtTextStyle: TextStyle;
+};

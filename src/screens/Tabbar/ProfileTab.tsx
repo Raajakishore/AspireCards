@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ViewStyle } from 'react-native';
 import UnderDevelopment from '../UnderDevelopment';
 
 export const ProfileTab = () : React.ReactElement => {
@@ -10,8 +10,12 @@ export const ProfileTab = () : React.ReactElement => {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   container: {
     flex: 1,
   }
 });
+
+type Styles = {
+  container: ViewStyle;
+};

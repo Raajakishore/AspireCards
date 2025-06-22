@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, ScrollView, SafeAreaView, StatusBar } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, SafeAreaView, StatusBar, ViewStyle, TextStyle } from 'react-native';
 import { colors } from '../../theme/colors';
 import { CardWithInfo } from '../../components/CardWithInfo';
 import { debitCardItems } from '../../utils/helper';
@@ -60,7 +60,7 @@ export const DebitCardTab = () => {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   aspireLogoViewStyle: {
     position: "absolute",
     right: 24,
@@ -138,3 +138,20 @@ const styles = StyleSheet.create({
         marginTop:32
   }
 });
+
+type Styles = {
+  aspireLogoViewStyle: ViewStyle;
+  containerStyle: ViewStyle;
+  balanceTextStyle: TextStyle;
+  balanceTitleTextStyle: TextStyle;
+  scrollViewStyle: ViewStyle;
+  balanceViewStyle: ViewStyle;
+  contentContainerStyle: ViewStyle;
+  bottomContainer: ViewStyle;
+  container: ViewStyle;
+  addedMargin: ViewStyle;
+  debitCardTextStyle: TextStyle;
+  dollarTextStyle: TextStyle;
+  dollarViewStyle: ViewStyle;
+  topContainer: ViewStyle;
+};

@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Dimensions, TextStyle, ViewStyle } from 'react-native';
 import { useRef, useState } from 'react';
 import { colors } from '../theme/colors';
 import VisaSVG from '../../assets/icons/visaLogo.svg'
@@ -91,7 +91,7 @@ export const CreditCardUI = ( { item  } : { item :  Card} ) => {
     </View>
     )
 }
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
     cardInfoTextStyle: {
         color: colors.background.primary,
         fontFamily: "AvenirDemiBold",
@@ -158,3 +158,17 @@ const styles = StyleSheet.create({
         borderTopRightRadius:12, 
     }
 });
+
+type Styles = {
+  cardInfoTextStyle: TextStyle;
+  cardNumTextStyle: TextStyle;
+  cardNumViewStyle: ViewStyle;
+  cardViewStyle: ViewStyle;
+  container: ViewStyle;
+  expAndCvvViewStyle: ViewStyle;
+  nameTextStyle: TextStyle;
+  nameViewStyle: ViewStyle;
+  visaLogoViewStyle: ViewStyle;
+  cardVisibilityViewStyle: ViewStyle;
+  cardTouchableOpacityStyle: ViewStyle;
+};

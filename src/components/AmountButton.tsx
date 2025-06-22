@@ -1,9 +1,13 @@
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, TextStyle, ViewStyle } from 'react-native';
 import { useState } from 'react';
 import { colors } from '../theme/colors';
 
+interface amountButtonProps {
+  amount : number,
+  setAmount: React.Dispatch<React.SetStateAction<number>> 
+}
 
-export const AmountButton  = ( { amount, setAmount } ) => {
+export const AmountButton  = ( { amount, setAmount } : amountButtonProps ) => {
     const [isOn, setIsOn] = useState(true);
     
   return (
@@ -13,7 +17,7 @@ export const AmountButton  = ( { amount, setAmount } ) => {
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
     amountTextStyle: {
         color: colors.text.green,
         fontFamily: "AvenirDemiBold"
@@ -25,3 +29,8 @@ const styles = StyleSheet.create({
         paddingVertical: 12
     }
 });
+
+type Styles = {
+  amountTextStyle: TextStyle;
+  container: ViewStyle;
+};

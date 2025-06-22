@@ -8,6 +8,8 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   Platform,
+  ViewStyle,
+  TextStyle,
 } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { addNewCardAction } from '../store/actions';
@@ -27,12 +29,11 @@ function randomInt(min : number, max: number) : number {
  */
 function generateExpiryDate(yearsAhead = 5) {
   const now = new Date();
-  // Pick a future month offset between 1 and yearsAhead*12
   const offsetMonths = randomInt(1, yearsAhead * 12);
   const future = new Date(now.getFullYear(), now.getMonth() + offsetMonths);
 
-  const month = String(future.getMonth() + 1).padStart(2, '0'); // 0-indexed
-  const year  = String(future.getFullYear() % 100).padStart(2, '0'); // last two digits
+  const month = String(future.getMonth() + 1).padStart(2, '0');
+  const year  = String(future.getFullYear() % 100).padStart(2, '0');
 
   return `${month}/${year}`;
 }
@@ -107,7 +108,7 @@ export default function AddNewCardModal({
   );
 }
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create<Styles>({
   button: {
     paddingHorizontal: 16,
     paddingVertical: 10,
@@ -153,3 +154,14 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
 });
+
+type Styles = {
+  button: ViewStyle;
+  buttonDisabled: ViewStyle;
+  buttonRow: ViewStyle;
+  buttonText: TextStyle;
+  container: ViewStyle;
+  input: TextStyle;
+  overlay: ViewStyle;
+  title: TextStyle;
+};

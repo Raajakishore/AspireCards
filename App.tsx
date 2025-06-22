@@ -6,7 +6,9 @@ import { SpendingLimit } from './src/screens/SpendingLimit';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
 import { store } from './src/store';
-const Stack = createNativeStackNavigator();
+import { RootStackParamList } from './src/utils/types';
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootStack() {
   return (

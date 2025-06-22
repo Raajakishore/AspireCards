@@ -13,47 +13,43 @@ import {
     getCardDetailsAction,
     addNewCardAction,
     updateCardAction
-} from './actions'; // your trigger-only actions
+} from './actions';
+import { SagaIterator } from 'redux-saga';
 
-// 1️⃣ Fetch all cards
-function* getCardDetailsSaga() {
+// Fetch all cards
+function* getCardDetailsSaga() : SagaIterator {
   try {
-    // calls mockApi.getAllCardDetails() which waits 1s
     const cards = yield call(getAllCardDetails);
 
-    // dispatch to store them in Redux
     yield put(setAllCardDetails(cards));
   } catch (err) {
     console.error('Error fetching cards:', err);
   }
 }
 
-// 2️⃣ Add a new card
-function* addNewCardSaga(action: ReturnType<typeof addNewCardAction>) {
+// Add a new card
+function* addNewCardSaga(action: ReturnType<typeof addNewCardAction>) : SagaIterator {
   try {
-    // action.payload is your card object
     const newCard = yield call(addNewCard, action.payload);
-    // mockApi.addNewCard waits 300ms and returns { ...card, id }
+
     yield put(storeNewCard(newCard));
   } catch (err) {
     console.error('Error adding card:', err);
   }
 }
 
-// 3️⃣ Update an existing card’s settings
-function* updateCardDetailsSaga(action: ReturnType<typeof updateCardAction>) {
+// Update an existing card’s settings
+function* updateCardDetailsSaga(action: ReturnType<typeof updateCardAction>) : SagaIterator {
   try {
     const { id, updates } = action.payload;
-    // calls mockApi.updateCard(id, updates) which waits 300ms
     const updatedCard = yield call(updateCard, id, updates);
-    // dispatch the same settings you passed back into Redux
     yield put(updateCardSettings(updatedCard));
   } catch (err) {
     console.error('Error updating card:', err);
   }
 }
 
-// 4️⃣ Watchers
+// Watchers
 function* watchCard() {
   yield all([
     takeEvery(getCardDetailsAction.type, getCardDetailsSaga),
@@ -68,7 +64,3 @@ export default function* rootSaga() {
     watchCard()
   ]);
 }
-
-// get - getAllCardDetails
-// post - add New Card
-// put - update card - freeze card, weekly spending limit
