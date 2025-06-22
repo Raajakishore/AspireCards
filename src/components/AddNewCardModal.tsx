@@ -66,6 +66,8 @@ export default function AddNewCardModal({
         isCardFreezed: false,
       }),
     );
+    setName("");
+    setCardNumber("");
     onClose();
   };
 
@@ -106,7 +108,11 @@ export default function AddNewCardModal({
           <View style={styles.buttonRow}>
             <TouchableOpacity
               style={styles.button}
-              onPress={onClose}
+              onPress={()=>{
+                setName("");
+                setCardNumber("");
+                onClose();
+              }}
               testID="cancel-button"
             >
               <Text style={[styles.buttonText, { color: "#666" }]}>Cancel</Text>
