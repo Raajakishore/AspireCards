@@ -86,17 +86,6 @@ The project uses **Jest** and **React Native Testing Library**.
   ```
 ---
 
-## Linting & Formatting
-
-* **ESLint with Airbnb + Prettier**
-
-  ```bash
-  yarn lint
-  yarn lint-fix
-  ```
-
----
-
 ## Folder Structure
 
 ```
