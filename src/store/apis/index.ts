@@ -1,7 +1,7 @@
 // mockCardApi.js
 
 // In‐memory store
-let cards = [
+const cards = [
   { id: 1, name: 'Mark Henry',   cardNum: '4567893214560976', expiryDate: '12/25', cvv: '234', isSpendingLimitEnabled: false, spendingLimit: 0, isCardFreezed: false },
   { id: 2, name: 'Raaja Kishore', cardNum: '5673459076348902', expiryDate: '11/27', cvv: '876', isSpendingLimitEnabled: false, spendingLimit: 0, isCardFreezed: false },
   { id: 3, name: 'Mark Henry',   cardNum: '6748928347018594', expiryDate: '09/31', cvv: '432', isSpendingLimitEnabled: false, spendingLimit: 0, isCardFreezed: false },

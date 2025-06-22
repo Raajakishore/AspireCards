@@ -58,61 +58,61 @@ export const DebitCardTab = () => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+  aspireLogoViewStyle: {
+    position: "absolute",
+    right: 24,
+    top: 28
   },
-  topContainer : {
-        flex: 0.2,
-        padding : 24
-  },
-  bottomContainer : {
-    flex: 0.8,
-    backgroundColor: colors.background.primary,
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-    padding: 12
-  },
-  debitCardTextStyle: {
-      marginVertical: 24,
+  balanceTextStyle: {
+      color: colors.text.primary,
       fontFamily : "AvenirBold",
-      fontSize: 24,
-      color: colors.text.primary
+      fontSize: 24
+  },
+  balanceTitleTextStyle: {
+      color: colors.text.primary,
+      fontFamily : "AvenirMedium",
+      fontSize: 14
   },
   balanceViewStyle: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     marginVertical: 14
   },
-  balanceTitleTextStyle: {
-      fontFamily : "AvenirMedium",
-      fontSize: 14,
-      color: colors.text.primary
+  bottomContainer : {
+    backgroundColor: colors.background.primary,
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    flex: 0.8,
+    padding: 12
   },
-  balanceTextStyle: {
+  container: {
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    flex: 1,
+    justifyContent: 'center',
+  },
+  debitCardTextStyle: {
+      color: colors.text.primary,
       fontFamily : "AvenirBold",
       fontSize: 24,
-      color: colors.text.primary
-  },
-  dollarViewStyle: {
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    backgroundColor: colors.background.green,
-    borderRadius: 6,
-    alignItems:'center',
-    justifyContent:'center',
-    marginRight: 10
+      marginVertical: 24
   },
   dollarTextStyle : {
-    fontSize: 12,
+    color: colors.text.primary,
     fontFamily : "AvenirBold",
-    color: colors.text.primary
+    fontSize: 12
   },
-  aspireLogoViewStyle: {
-    position: "absolute",
-    right: 24,
-    top: 28
+  dollarViewStyle: {
+    alignItems:'center',
+    backgroundColor: colors.background.green,
+    borderRadius: 6,
+    justifyContent:'center',
+    marginRight: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 4
+  },
+  topContainer : {
+        flex: 0.2,
+        padding : 24
   }
 });

@@ -14,14 +14,14 @@ export const AmountButton  = ( { amount, setAmount } ) => {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        paddingHorizontal: 24,
-        paddingVertical: 12,
-        backgroundColor: '#f0fcf4',
-        borderRadius: 6
-    },
     amountTextStyle: {
-        fontFamily: "AvenirDemiBold",
-        color: colors.text.green
+        color: colors.text.green,
+        fontFamily: "AvenirDemiBold"
+    },
+    container: {
+        backgroundColor: '#f0fcf4',
+        borderRadius: 6,
+        paddingHorizontal: 24,
+        paddingVertical: 12
     }
 });

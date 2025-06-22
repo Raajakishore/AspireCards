@@ -31,20 +31,6 @@ export const PaymentsTab = () => {
 const OVERLAP = 80; // how much the bottom container covers the top
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#eee',
-  },
-  topContainer: {
-    height: SCREEN_HEIGHT * 0.4,
-    backgroundColor: '#4a90e2',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  topText: {
-    color: 'white',
-    fontSize: 24,
-  },
   bottomWrapper: {
     position: 'absolute',
     top: SCREEN_HEIGHT * 0.4 - OVERLAP, // raise it up to overlap
@@ -58,16 +44,30 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 16,
     overflow: 'hidden',
   },
+  container: {
+    backgroundColor: '#eee',
+    flex: 1,
+  },
+  item: {
+    alignItems: 'center',
+    backgroundColor: '#fafafa',
+    borderRadius: 8,
+    height: 60,
+    justifyContent: 'center',
+    marginBottom: 12,
+  },
   scrollContent: {
     padding: 16,
     paddingTop: OVERLAP + 16,  // give some breathing room at the top
   },
-  item: {
-    height: 60,
-    marginBottom: 12,
-    backgroundColor: '#fafafa',
-    justifyContent: 'center',
+  topContainer: {
     alignItems: 'center',
-    borderRadius: 8,
+    backgroundColor: '#4a90e2',
+    height: SCREEN_HEIGHT * 0.4,
+    justifyContent: 'center',
+  },
+  topText: {
+    color: 'white',
+    fontSize: 24,
   },
 });

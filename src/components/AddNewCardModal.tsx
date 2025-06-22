@@ -109,37 +109,6 @@ export default function AddNewCardModal({
 }
 
 const styles = StyleSheet.create({
-  overlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'center',
-    padding: 20,
-  },
-  container: {
-    backgroundColor: colors.background.primary,
-    borderRadius: 12,
-    padding: 20,
-    elevation: 5,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: '600',
-    marginBottom: 12,
-    textAlign: 'center',
-    color: colors.text.green,
-    fontFamily: 'AvenirDemiBold'
-  },
-  input: {
-    borderBottomWidth: 1,
-    borderColor: '#ccc',
-    marginBottom: 16,
-    fontSize: 16,
-    paddingVertical: 8,
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
   button: {
     paddingHorizontal: 16,
     paddingVertical: 10,
@@ -148,10 +117,41 @@ const styles = StyleSheet.create({
   buttonDisabled: {
     opacity: 0.5,
   },
+  buttonRow: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  },
   buttonText: {
-    fontSize: 16,
-    fontWeight: '500',
     color: colors.text.green,
-    fontFamily: 'AvenirDemiBold'
+    fontFamily: 'AvenirDemiBold',
+    fontSize: 16,
+    fontWeight: '500'
+  },
+  container: {
+    backgroundColor: colors.background.primary,
+    borderRadius: 12,
+    elevation: 5,
+    padding: 20,
+  },
+  input: {
+    borderBottomWidth: 1,
+    borderColor: '#ccc',
+    fontSize: 16,
+    marginBottom: 16,
+    paddingVertical: 8,
+  },
+  overlay: {
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+  },
+  title: {
+    color: colors.text.green,
+    fontFamily: 'AvenirDemiBold',
+    fontSize: 18,
+    fontWeight: '600',
+    marginBottom: 12,
+    textAlign: 'center'
   },
 });

@@ -89,22 +89,22 @@ export const CardWithInfo  = ( { title, body, isTogglePresent  = false, setModal
 
 const styles = StyleSheet.create({
     container: {
+        alignItems:'center', 
         flexDirection:'row', 
-        justifyContent:'space-between', 
-        alignItems:'center',
+        justifyContent:'space-between',
         marginTop: 32
     },
+    emptyCardStyle: {
+        opacity: 0.6
+    },
     iconStyle: {
-        flexDirection:'row',
-        alignItems:'center'
+        alignItems:'center',
+        flexDirection:'row'
     },
     infoStyle: {
         paddingHorizontal:12
     },
     toggleButtonStyle: {
 
-    },
-    emptyCardStyle: {
-        opacity: 0.6
     }
 });

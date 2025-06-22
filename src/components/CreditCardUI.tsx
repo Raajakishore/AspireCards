@@ -92,56 +92,56 @@ export const CreditCardUI = ( { item  } ) => {
     )
 }
 const styles = StyleSheet.create({
-    container: {
-        position: "absolute",
-        top: "-10%",
-        zIndex: 100,
-        alignSelf: 'center'
+    cardInfoTextStyle: {
+        color: colors.background.primary,
+        fontFamily: "AvenirDemiBold",
+        fontSize: 12,
+        marginRight: 32
     },
-    cardViewStyle: {
-        backgroundColor: colors.background.green,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 12,
-        padding: 24
+    cardNumTextStyle: {
+        color: colors.background.primary,
+        fontFamily: "AvenirDemiBold",
+        fontSize: 14,
+        marginRight: 24
     },
-    nameTextStyle:{
-        fontSize : 22,
-        fontFamily: "AvenirBold",
-        color: colors.background.primary
-    },
-    nameViewStyle:{
+    cardNumViewStyle: {
         flexDirection:'row', 
         justifyContent:'flex-start',
-        width:'100%',
-        marginVertical: 24
+        marginBottom: 8,
+        width:'100%'
     },
-    visaLogoViewStyle : { 
-        flexDirection:'row', 
-        justifyContent:'flex-end', 
-        width: '100%'
+    cardViewStyle: {
+        alignItems: 'center',
+        backgroundColor: colors.background.green,
+        borderRadius: 12,
+        justifyContent: 'center',
+        padding: 24
+    },
+    container: {
+        alignSelf: 'center',
+        position: "absolute",
+        top: "-10%",
+        zIndex: 100
     },
     expAndCvvViewStyle: {
         flexDirection : 'row',
         justifyContent:'flex-start',
         width: '100%'
     },
-    cardNumTextStyle: {
-        fontSize: 14,
-        fontFamily: "AvenirDemiBold",
+    nameTextStyle:{
         color: colors.background.primary,
-        marginRight: 24
+        fontFamily: "AvenirBold",
+        fontSize : 22
     },
-    cardInfoTextStyle: {
-        fontSize: 12,
-        fontFamily: "AvenirDemiBold",
-        color: colors.background.primary,
-        marginRight: 32
-    },
-    cardNumViewStyle: {
+    nameViewStyle:{
         flexDirection:'row', 
         justifyContent:'flex-start',
-        width:'100%',
-        marginBottom: 8
+        marginVertical: 24,
+        width:'100%'
+    },
+    visaLogoViewStyle : { 
+        flexDirection:'row', 
+        justifyContent:'flex-end', 
+        width: '100%'
     }
 });

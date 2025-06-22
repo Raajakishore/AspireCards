@@ -72,61 +72,61 @@ export const SpendingLimit = () => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background.secondary,
-  },
-  headerStyle: {
-    marginTop: 14,
-    padding: 24,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  spendingLimitTextStyle: {
+  amountTextStyle: {
+    fontFamily: 'AvenirBold',
     fontSize: 24,
-    fontFamily: "AvenirBold",
-    color: colors.text.primary,
-    marginLeft: 24,
-    marginBottom: 40
+    marginLeft: 12
   },
   bottomContainerViewStyle: {
     backgroundColor: colors.background.primary,
-    flex:1,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
-    padding: 24,
-    justifyContent: "space-between"
+    flex:1,
+    justifyContent: "space-between",
+    padding: 24
+  },
+  container: {
+    backgroundColor: colors.background.secondary,
+    flex: 1,
+  },
+  dollarAndTextStyle: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginTop: 16
+  },
+  dollarTextStyle : {
+    color: colors.text.primary,
+    fontFamily : "AvenirBold",
+    fontSize: 12
+  },
+  dollarViewStyle: {
+    backgroundColor: colors.background.green,
+    borderRadius: 6,
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    paddingHorizontal: 12,
+    paddingVertical: 4
+  },
+  headerStyle: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 14,
+    padding: 24
   },
   indicatorViewStyle: {
     flexDirection: "row"
   },
+  spendingLimitTextStyle: {
+    color: colors.text.primary,
+    fontFamily: "AvenirBold",
+    fontSize: 24,
+    marginBottom: 40,
+    marginLeft: 24
+  },
   weeklyDebtTextStyle: {
     fontFamily: "AvenirMedium",
     fontSize: 14,
-    marginLeft: 12
-  },
-  dollarAndTextStyle: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 16
-  },
-  dollarViewStyle: {
-    paddingHorizontal: 12,
-    paddingVertical: 4,
-    backgroundColor: colors.background.green,
-    borderRadius: 6,
-    flexDirection: "row",
-    justifyContent: "flex-start"
-  },
-  dollarTextStyle : {
-    fontSize: 12,
-    fontFamily : "AvenirBold",
-    color: colors.text.primary
-  },
-  amountTextStyle: {
-    fontSize: 24,
-    fontFamily: 'AvenirBold',
     marginLeft: 12
   }
 });
