@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, ScrollView, SafeAreaView, StatusBar, ViewStyle, TextStyle } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, SafeAreaView, StatusBar, ViewStyle, TextStyle, Platform } from 'react-native';
 import { colors } from '../../theme/colors';
 import { CardWithInfo } from '../../components/CardWithInfo';
 import { debitCardItems } from '../../utils/helper';
@@ -17,12 +17,12 @@ export const DebitCardTab = () => {
       dispatch(getCardDetailsAction());
    }, [])
   return (
-    <SafeAreaView style = { styles.containerStyle  } >
-              <StatusBar barStyle="light-content" backgroundColor={colors.background.secondary} />
+    <SafeAreaView style = { styles.containerStyle } >
+      <StatusBar barStyle="light-content"  backgroundColor={colors.background.primary}/>
         <View style = { styles.aspireLogoViewStyle} >
           <AspireLogo width={28} height={28} />
         </View>
-        <View style = { styles.topContainer } >
+        <View style = { { ...styles.topContainer, marginTop: Platform.OS === "ios" ? 0 : 32}  } >
                 <Text style={ styles.debitCardTextStyle }>{"Debit Card"}</Text>
                 <Text style={ styles.balanceTitleTextStyle }>{"Available Balance"}</Text>
                 <View style = { styles.balanceViewStyle }>
@@ -81,7 +81,7 @@ const styles = StyleSheet.create<Styles>({
       fontSize: 14
   },
   scrollViewStyle : { 
-    height:"90%", 
+    height:"95%", 
     width:"100%", 
     zIndex: 10, 
     position: "absolute", 
@@ -93,8 +93,8 @@ const styles = StyleSheet.create<Styles>({
     marginVertical: 14
   },
   contentContainerStyle : {
-              paddingTop: "45%"
-            },
+    paddingTop: "55%"
+  },
   bottomContainer : {
     backgroundColor: colors.background.primary,
     borderTopLeftRadius: 24,
@@ -135,7 +135,6 @@ const styles = StyleSheet.create<Styles>({
   topContainer : {
         flex: 0.2,
         paddingHorizontal : 24,
-        marginTop:32
   }
 });
 

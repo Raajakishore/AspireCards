@@ -1,5 +1,5 @@
 import { useNavigation } from '@react-navigation/native';
-import { SafeAreaView, StatusBar, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { Platform, SafeAreaView, StatusBar, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native';
 import {Ionicons} from '@expo/vector-icons';
 import { colors } from '../theme/colors';
 import AspireLogo from '../../assets/icons/homeActiveTabIcon.svg'
@@ -16,10 +16,11 @@ export const SpendingLimit = () => {
   const [spendingLimit, setSpendingLimit] = useState(currentCard?.spendingLimit ?? 0);
   const dispatch = useDispatch();
   return (
-       <SafeAreaView style = { styles.container }>
-          <StatusBar barStyle="light-content" backgroundColor={colors.background.secondary} />
-        
-         <View style = { styles.headerStyle }>
+        <>
+       <SafeAreaView style = { styles.topInset }/>
+        <StatusBar barStyle="light-content" backgroundColor={colors.background.secondary} />
+       <View style = {styles.container}>
+         <View style = { { ...styles.headerStyle, marginTop : Platform.OS === "android" ? 32 : 0 } }>
             <Ionicons name="chevron-back" size={32} color={ colors.background.primary } onPress = { () => { navigation.goBack() }} />
             <AspireLogo width={28} height={28} />
          </View>
@@ -36,16 +37,16 @@ export const SpendingLimit = () => {
               </View>
               <Text style = { styles.amountTextStyle }>{spendingLimit!== 0? spendingLimit : ""}</Text>
             </View>
-            <View style = { { borderWidth: 1, width: "100%", borderBlockColor: colors.background.grey, marginVertical : 12 } } />
-            <Text style = { { color: colors.text.grey, fontFamily: "AvenirRegular", fontSize: 12  } } >Here weekly means the last 7 days - not the calendar week</Text>
-            <View style = { { flexDirection: 'row', justifyContent: 'space-between', marginVertical: 32}}>
+            <View style = { styles.borderLineStyle }/>
+            <Text style = { styles.infoTextStyle } >Here weekly means the last 7 days - not the calendar week</Text>
+            <View style = { styles.amountContainerStyle }>
               <AmountButton amount = {5000}  setAmount = {setSpendingLimit}/>
               <AmountButton amount = {10000} setAmount = {setSpendingLimit}/>
               <AmountButton amount = {15000} setAmount = {setSpendingLimit}/>
             </View>
             </View>
             <View>
-            <View style = { { width: "100%", justifyContent:'center', alignItems: 'center'} } >
+            <View style = {styles.saveViewStyle } >
               <TouchableOpacity 
                 style = {{ height: 56, width: "90%", backgroundColor: spendingLimit === 0 ? colors.background.grey : colors.background.green, borderRadius: 32, justifyContent: 'center', alignItems: 'center'}} 
                 disabled={spendingLimit === 0}
@@ -66,12 +67,15 @@ export const SpendingLimit = () => {
                 }
                   }
               >
-                  <Text style = { { fontSize: 16, color: colors.text.primary, fontFamily: "AvenirDemiBold" } } >Save</Text>
+                  <Text style = { styles.saveTextStyle } >Save</Text>
               </TouchableOpacity>
             </View>
             </View>
          </View>
-       </SafeAreaView>
+         </View>
+      <SafeAreaView style = { styles.bottomInset }/>
+
+      </>
   );
 }
 
@@ -115,8 +119,8 @@ const styles = StyleSheet.create<Styles>({
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: 14,
-    padding: 24
+    paddingHorizontal: 24,
+    paddingBottom: 24
   },
   indicatorViewStyle: {
     flexDirection: "row"
@@ -132,6 +136,40 @@ const styles = StyleSheet.create<Styles>({
     fontFamily: "AvenirMedium",
     fontSize: 14,
     marginLeft: 12
+  },
+   topInset: {
+    flex: 0,                
+    backgroundColor: colors.background.secondary,  
+  },
+   bottomInset: {
+    flex: 0,
+    backgroundColor: colors.background.primary,  
+  },
+  saveTextStyle : { 
+    fontSize: 16, 
+    color: colors.text.primary, 
+    fontFamily: "AvenirDemiBold" 
+  } ,
+  borderLineStyle : { 
+    borderWidth: 1, 
+    width: "100%", 
+    borderBlockColor: colors.background.grey, 
+    marginVertical : 12 
+  },
+  infoTextStyle : { 
+    color: colors.text.grey, 
+    fontFamily: "AvenirRegular", 
+    fontSize: 12  
+  },
+  amountContainerStyle: { 
+    flexDirection: 'row', 
+    justifyContent: 'space-between', 
+    marginVertical: 32
+  },
+  saveViewStyle:  { 
+    width: "100%", 
+    justifyContent:'center', 
+    alignItems: 'center'
   }
 });
 
@@ -146,4 +184,11 @@ type Styles = {
   indicatorViewStyle: ViewStyle;
   spendingLimitTextStyle: TextStyle;
   weeklyDebtTextStyle: TextStyle;
+  topInset : ViewStyle;
+  bottomInset: ViewStyle;
+  saveTextStyle: TextStyle;
+  borderLineStyle: ViewStyle;
+  amountContainerStyle: ViewStyle;
+  infoTextStyle: TextStyle;
+  saveViewStyle: ViewStyle;
 };
