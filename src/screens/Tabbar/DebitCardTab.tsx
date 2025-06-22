@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, SafeAreaView, StatusBar } from 'react-native';
 import { colors } from '../../theme/colors';
 import { CardWithInfo } from '../../components/CardWithInfo';
 import { debitCardItems } from '../../utils/helper';
@@ -14,11 +14,11 @@ export const DebitCardTab = () => {
    const [modalVisible, setModalVisible] = useState(false);
    const dispatch = useDispatch();
    useEffect(()=>{
-
       dispatch(getCardDetailsAction());
    }, [])
   return (
-    <View style = { { flex:1, backgroundColor : colors.background.secondary} } >
+    <SafeAreaView style = { styles.containerStyle  } >
+              <StatusBar barStyle="light-content" backgroundColor={colors.background.secondary} />
         <View style = { styles.aspireLogoViewStyle} >
           <AspireLogo width={28} height={28} />
         </View>
@@ -35,16 +35,18 @@ export const DebitCardTab = () => {
                 </View>
 
         </View>
-
+       <ScrollView
+            style={ styles.scrollViewStyle }
+            contentContainerStyle={ styles.contentContainerStyle}
+            showsVerticalScrollIndicator={false}
+          >
         <View style = { styles.bottomContainer } >
             <CreditCardCarousel />
-            <View style = {{marginTop: "45%"}}>
+            <View style = { styles.addedMargin }>
             < SpendingLimitBar />
             {
-           
-              
                 debitCardItems.map((item)=>{
-                    return (<CardWithInfo title = {item.title} body = {item.body} isTogglePresent = {item.isTogglePresent} setModalVisible = {setModalVisible} />)
+                    return (<CardWithInfo  key={item.title}  item = {item} setModalVisible = {setModalVisible}  />)
                 })
             }
             </View>
@@ -53,7 +55,8 @@ export const DebitCardTab = () => {
                   onClose={() => setModalVisible(false)}
                 />
         </View>
-    </View>
+        </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -61,7 +64,11 @@ const styles = StyleSheet.create({
   aspireLogoViewStyle: {
     position: "absolute",
     right: 24,
-    top: 28
+    top: 50
+  },
+  containerStyle: {
+     flex:1, 
+     backgroundColor : colors.background.secondary
   },
   balanceTextStyle: {
       color: colors.text.primary,
@@ -73,23 +80,37 @@ const styles = StyleSheet.create({
       fontFamily : "AvenirMedium",
       fontSize: 14
   },
+  scrollViewStyle : { 
+    height:"90%", 
+    width:"100%", 
+    zIndex: 10, 
+    position: "absolute", 
+    bottom:0 
+  },
   balanceViewStyle: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     marginVertical: 14
   },
+  contentContainerStyle : {
+              paddingTop: "45%"
+            },
   bottomContainer : {
     backgroundColor: colors.background.primary,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     flex: 0.8,
-    padding: 12
+    padding: 12,
+    paddingBottom: 32
   },
   container: {
     alignItems: 'center',
     backgroundColor: '#fff',
     flex: 1,
     justifyContent: 'center',
+  },
+  addedMargin : {
+    marginTop: "42%"
   },
   debitCardTextStyle: {
       color: colors.text.primary,
@@ -113,6 +134,7 @@ const styles = StyleSheet.create({
   },
   topContainer : {
         flex: 0.2,
-        padding : 24
+        paddingHorizontal : 24,
+        marginTop:32
   }
 });

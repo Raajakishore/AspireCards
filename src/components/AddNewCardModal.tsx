@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useDebugValue } from 'react';
+import React, { useState } from 'react';
 import {
   Modal,
   View,
@@ -18,13 +18,12 @@ interface AddNewCardModalProps {
   onClose: () => void;
 }
 
-function randomInt(min, max) {
+function randomInt(min : number, max: number) : number {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 /**
  * Generate a random expiry date in the format "MM/YY"
- * between the next month and up to `yearsAhead` years from now.
  */
 function generateExpiryDate(yearsAhead = 5) {
   const now = new Date();
@@ -39,7 +38,7 @@ function generateExpiryDate(yearsAhead = 5) {
 }
 
 /**
- * Generate a random 3-digit CVV (string, zero-padded)
+ * Generate a random 3-digit CVV
  */
 function generateCVV() {
   return String(randomInt(0, 999)).padStart(3, '0');
@@ -55,7 +54,7 @@ export default function AddNewCardModal({
 
 
   const handleSave = () => {
-    dispatch(addNewCardAction({name, cardNum, id : Date.now().toString(), expiryDate: generateExpiryDate(), cvv: generateCVV(), isSpendingLimitEnabled : false, spendingLimit: 0, isCardFreezed: false }))
+    dispatch(addNewCardAction({name, cardNum, id : Date.now(), expiryDate: generateExpiryDate(), cvv: generateCVV(), isSpendingLimitEnabled : false, spendingLimit: 0, isCardFreezed: false }))
     onClose();
   };
 
@@ -95,7 +94,7 @@ export default function AddNewCardModal({
               <Text style={[styles.buttonText, { color: '#666' }]}>Cancel</Text>
             </TouchableOpacity>
             <TouchableOpacity
-              style={[styles.button, !name || cardNum.length < 16 && styles.buttonDisabled]}
+              style={[styles.button, (!name || cardNum.length < 16) && styles.buttonDisabled]}
               onPress={handleSave}
               disabled={!name || cardNum.length < 16}
             >
@@ -112,7 +111,6 @@ const styles = StyleSheet.create({
   button: {
     paddingHorizontal: 16,
     paddingVertical: 10,
-
   },
   buttonDisabled: {
     opacity: 0.5,

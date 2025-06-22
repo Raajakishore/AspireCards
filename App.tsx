@@ -6,7 +6,6 @@ import { SpendingLimit } from './src/screens/SpendingLimit';
 import { useFonts } from 'expo-font';
 import { Provider } from 'react-redux';
 import { store } from './src/store';
-
 const Stack = createNativeStackNavigator();
 
 function RootStack() {
@@ -32,11 +31,11 @@ export default function App() {
   }
 
   return (
-    <Provider store={store}>
-      <NavigationContainer>
-          <RootStack />
-      </NavigationContainer>
-    </Provider>
+          <Provider store={store}>
+            <NavigationContainer>
+                <RootStack />
+            </NavigationContainer>
+          </Provider>
 
   );
 }

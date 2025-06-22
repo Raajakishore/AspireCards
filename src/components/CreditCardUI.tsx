@@ -9,20 +9,20 @@ import Carousel from 'react-native-snap-carousel';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSelectedCardIdx } from '../store/cardSlice';
 import { dummyCardData } from '../utils/helper';
+import { Card, storeType } from '../utils/types';
 
-export const CreditCardCarousel  = (  ) => {
-    const cardDetails = useSelector((state)=>state.cards.cardDetails);
+export const CreditCardCarousel  =  () : React.ReactElement => {
+    const cardDetails = useSelector((state : storeType)=>state.cards.cardDetails);
     const carouselRef = useRef(null);
     const { width: SLIDER_WIDTH } = Dimensions.get('window');
     const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.90);
-    const ITEM_HEIGHT = 200;
     const dispatch = useDispatch();
   return (
     <View style = { styles.container }>
         {
         cardDetails.length === 0 ?
 
-        <CreditCardUI  item={ dummyCardData } />
+        <CreditCardUI  item = { dummyCardData } />
         :
         <Carousel
             ref={carouselRef}
@@ -44,16 +44,16 @@ export const CreditCardCarousel  = (  ) => {
   );
 }
 
-export const CreditCardUI = ( { item  } ) => {
+export const CreditCardUI = ( { item  } : { item :  Card} ) => {
     const  { name, cardNum, expiryDate, cvv, isCardFreezed } = item;
 
     const [cardNumberVisibility, setCardNumberVisibility] = useState(true);
     return (
         <View>
-         <View style = {{flexDirection:'row', justifyContent:'flex-end'}}>
+         <View style = { styles.cardVisibilityViewStyle }>
             <TouchableOpacity
             activeOpacity={1}  
-            style = {{ flexDirection: 'row', alignItems: 'center', backgroundColor:colors.background.primary, paddingHorizontal: 12, paddingVertical: 8, borderTopLeftRadius:12, borderTopRightRadius:12, }}
+            style = {styles.cardTouchableOpacityStyle }
             onPress = { (  ) => { setCardNumberVisibility(prev => !prev)} }
             >
                 { cardNumberVisibility ?  <HideEyeSVG width = { 16 } height = { 16 } /> : <ShowEyeSVG width = { 16 } height = { 16 } /> }
@@ -61,7 +61,7 @@ export const CreditCardUI = ( { item  } ) => {
             </TouchableOpacity>
         </View>
 
-        <View style = { [styles.cardViewStyle, isCardFreezed && { backgroundColor: "#c7e9c0"}] } >
+        <View style = { [styles.cardViewStyle, isCardFreezed && { backgroundColor: colors.background.mediumGreen}] } >
             <View style = { styles.visaLogoViewStyle }>
                 <AspireLogoSVG width={74} height={21}/>
             </View>
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     container: {
         alignSelf: 'center',
         position: "absolute",
-        top: "-10%",
+        top: "-15%",
         zIndex: 100
     },
     expAndCvvViewStyle: {
@@ -143,5 +143,18 @@ const styles = StyleSheet.create({
         flexDirection:'row', 
         justifyContent:'flex-end', 
         width: '100%'
+    }, 
+    cardVisibilityViewStyle : {
+        flexDirection:'row', 
+        justifyContent:'flex-end'
+    },
+    cardTouchableOpacityStyle : { 
+        flexDirection: 'row', 
+        alignItems: 'center',
+        backgroundColor:colors.background.primary, 
+        paddingHorizontal: 12, 
+        paddingVertical: 8, 
+        borderTopLeftRadius:12, 
+        borderTopRightRadius:12, 
     }
 });

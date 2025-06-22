@@ -4,9 +4,10 @@ export const colors = {
         secondary: "#0C365A",
         accent: "#3A7CA5",
         green: "#01D167",
+        mediumGreen: "#c7e9c0",
+        opaqueGreen : "#f0fcf4",
         grey: "#EEEEEE",
         separatorGrey : "#22222233",
-        opaqueGreen : "#f0fcf4"
 
     },
     text : {
@@ -15,6 +16,7 @@ export const colors = {
         opaqueGrey: "#666",
         mediumGrey: "#22222233",
         grey: "##22222266",
-        green: "#01D167"
+        green: "#01D167",
+        lightGreen: "#388e3c"
     }
 }

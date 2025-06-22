@@ -11,9 +11,10 @@ import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectCurrentCard } from '../store/selectors';
 import { updateCardAction } from '../store/actions';
+import { DebitCardItemInfo } from '../utils/helper';
 
 
-const svgToRender = ( title )=>{
+const svgToRender = ( title : string ) =>{
     switch(title){
         case "Top-up account":
             return ( <InsightSVG width={36} height={36} /> )
@@ -29,8 +30,14 @@ const svgToRender = ( title )=>{
             break
     }
 }
-export const CardWithInfo  = ( { title, body, isTogglePresent  = false, setModalVisible} ) => {
 
+interface cardWithInfoProps {
+    item : DebitCardItemInfo
+    setModalVisible: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const CardWithInfo = ( { item  ,setModalVisible}  : cardWithInfoProps ) => {
+    const { title , body, isTogglePresent, toggleOnTitle, toggleOnBody} = item;
     const navigation = useNavigation();
     const currentCard = useSelector(selectCurrentCard);
     const [isOn, setIsOn] = useState(false);
@@ -67,8 +74,8 @@ export const CardWithInfo  = ( { title, body, isTogglePresent  = false, setModal
         <View style = { styles.iconStyle } >
             { svgToRender(title) }
             <View style = { styles.infoStyle } >
-                <Text style={{ fontFamily: 'AvenirMedium', fontSize: 16 }}>{title}</Text>
-                <Text style={{ fontFamily: 'AvenirRegular', fontSize: 14, marginVertical : 2 }}>{body}</Text>
+                <Text style={styles.titleTextStyle}>{ isOn ? toggleOnTitle : title }</Text>
+                <Text style={styles.bodyTextStyle}>{ isOn ? title === "Weekly spending limit" ? toggleOnBody + currentCard?.spendingLimit : toggleOnBody : body }</Text>
             </View>
         </View>
 
@@ -81,7 +88,7 @@ export const CardWithInfo  = ( { title, body, isTogglePresent  = false, setModal
         />
       </TouchableOpacity>
         :
-        <></> }
+        null }
 
     </TouchableOpacity>
   );
@@ -104,7 +111,13 @@ const styles = StyleSheet.create({
     infoStyle: {
         paddingHorizontal:12
     },
-    toggleButtonStyle: {
-
+    titleTextStyle: { 
+        fontFamily: 'AvenirMedium', 
+        fontSize: 16 
+    },
+    bodyTextStyle: {
+        fontFamily: 'AvenirRegular', 
+        fontSize: 14, 
+        marginVertical : 2 
     }
 });
