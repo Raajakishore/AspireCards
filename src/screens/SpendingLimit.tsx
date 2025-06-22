@@ -38,7 +38,7 @@ export const SpendingLimit = () => {
         <View
           style={{
             ...styles.headerStyle,
-            marginTop: Platform.OS === "android" ? 32 : 0,
+            marginTop: Platform.OS === "android" ? 42 : 0,
           }}
         >
           <Ionicons

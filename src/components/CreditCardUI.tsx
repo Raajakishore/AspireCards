@@ -140,13 +140,13 @@ const styles = StyleSheet.create<Styles>({
   cardInfoTextStyle: {
     color: colors.background.primary,
     fontFamily: "AvenirDemiBold",
-    fontSize: 12,
+    fontSize: 14,
     marginRight: 32,
   },
   cardNumTextStyle: {
     color: colors.background.primary,
     fontFamily: "AvenirDemiBold",
-    fontSize: 14,
+    fontSize: 16,
     marginRight: 24,
   },
   cardNumViewStyle: {
